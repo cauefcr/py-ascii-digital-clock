@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import time,os,sys
+import time,os
 
 class buffer(object):
 	def __init__(self):
@@ -15,15 +15,6 @@ class buffer(object):
 		self.line8 = ""
 
 	def print_lines(self,str1):
-		self.line0.replace("#",str1)
-		self.line1.replace("#",str1)
-		self.line2.replace("#",str1)
-		self.line3.replace("#",str1)
-		self.line4.replace("#",str1)
-		self.line5.replace("#",str1)
-		self.line6.replace("#",str1)
-		self.line7.replace("#",str1)
-		self.line8.replace("#",str1)
 		print(self.line0)
 		print(self.line1)
 		print(self.line2)
@@ -197,16 +188,11 @@ def get_time_string(H,M,S):
 		s = time.localtime().tm_sec
 		if len(str(s)) == 1:
 			s = "0"+str(s)
-#	print(str(h) + ":" + str(m) + ":" + str(s))
 	return str(h) + ":" + str(m) + ":" + str(s)
 
-def main(argv):
+def main():
 	global buf
 	buf = buffer()
-
-	if len(argv)>1:
-		#if argv[1]
-		pass
 
 	while True:
 		time.sleep(0.1)
@@ -214,8 +200,8 @@ def main(argv):
 		now = get_time_string(True,True,True)
 		load_9_segment_cli(now)#, bitch!
 
-		buf.print_lines("#")
+		buf.print_lines()
 		buf.clean()
 
 if __name__ == '__main__':
-	main(sys.argv)
+	main()
