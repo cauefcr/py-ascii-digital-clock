@@ -136,7 +136,7 @@ def get_big_chars():
 			if j != 0:
 				for k in big_chars:
 					if k.n == curr:
-						k.add_str(j,i)
+						k.add_str(j-1,i)
 		j += 1
 
 def new_separator():
