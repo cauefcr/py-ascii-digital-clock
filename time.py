@@ -141,15 +141,15 @@ def get_big_chars():
 
 def new_separator():
 	global buf
-	buf.line0 += "  "
-	buf.line1 += "  "
-	buf.line2 += "  "
-	buf.line3 += "  "
-	buf.line4 += "  "
-	buf.line5 += "  "
-	buf.line6 += "  "
-	buf.line7 += "  "
-	buf.line8 += "  "
+	buf.line0 += " "
+	buf.line1 += " "
+	buf.line2 += " "
+	buf.line3 += " "
+	buf.line4 += " "
+	buf.line5 += " "
+	buf.line6 += " "
+	buf.line7 += " "
+	buf.line8 += " "
 
 def load_9_segment_cli(time_str): 
 	global buf
@@ -181,23 +181,25 @@ def main():
 
 	buf = buffer()
 	get_big_chars()
-	for k in big_chars:
-		print (k.line0)
-		print (k.line1)
-		print (k.line2)
-		print (k.line3)
-		print (k.line4)
-		print (k.line5)
-		print (k.line6)
-		print (k.line7)
-		print (k.line8+"\n")
+#	for k in big_chars: #for testing the chars
+#		print (k.line0)
+#		print (k.line1)
+#		print (k.line2)
+#		print (k.line3)
+#		print (k.line4)
+#		print (k.line5)
+#		print (k.line6)
+#		print (k.line7)
+#		print (k.line8+"\n")
 
 	while True:
 		time.sleep(0.1)
 		os.system("clear")
 		now = get_time_string(True,True,True)
 		load_9_segment_cli(now)#, bitch!
+		print("\033[1;31m")
 		buf.print_lines()
+		print("\033[0m")
 		buf.clean()
 
 if __name__ == '__main__':
