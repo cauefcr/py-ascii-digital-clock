@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import time,os
+import time,os,sys
 
 class buffer(object):
 	def __init__(self):
@@ -56,25 +56,29 @@ def load_to_buf(time_str):
 		big_chars[char].add_to_buffer()
 		new_separator()
 
-def get_time_string(H,M,S):
-	global typeof
+def get_time_string(H,M,S,typeof):
 	pm = False
+
 	if H == True:
 		h = time.localtime().tm_hour
+
 		if h >=12:
 			if typeof == 12:
 				h = h-12
 			pm = True
 		if len(str(h)) == 1:
 			h = "0"+str(h)
+
 	if M == True:
 		m = time.localtime().tm_min
 		if len(str(m)) == 1:
 			m = "0"+str(m)
+
 	if S == True:
 		s = time.localtime().tm_sec
 		if len(str(s)) == 1:
 			s = "0"+str(s)
+
 	if typeof == 12 and pm == False:
 		return str(h) + ":" + str(m) + ":" + str(s) + ":AM"
 	if typeof == 12 and pm == True:
@@ -83,19 +87,26 @@ def get_time_string(H,M,S):
 		return str(h) + ":" + str(m) + ":" + str(s)
 		
 
-def main():
-	global typeof
+def main(argv):
 	global buf
 	global big_chars
 
-	typeof = 12	
+	if len(argv) > 1:
+		if (argv[1] == "12") or (argv[1] == "24"):
+			time_format = int(argv[1])
+		else:
+			print ("usage: ./time.py clock_type(12 or 24)")
+			exit()
+	else:
+		time_format = 24
+
 	buf = buffer()
 	get_big_chars()
 
 	while True:
 		time.sleep(0.1)
 		os.system("clear")
-		now = get_time_string(True,True,True)
+		now = get_time_string(True,True,True,time_format)
 		load_to_buf(now)#, bitch!
 		print("\033[1;31m")
 		buf.print_lines()
@@ -103,4 +114,4 @@ def main():
 		buf.clean()
 
 if __name__ == '__main__':
-	main()
+	main(sys.argv)
